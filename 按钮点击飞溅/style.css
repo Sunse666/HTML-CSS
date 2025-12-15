@@ -1,0 +1,45 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: #222;
+}
+#btn {
+  position: relative;
+  padding: 20px 40px;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  background: #3498db;
+  font-size: 1.25em;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  transition: 0.25s;
+  overflow: hidden;
+}
+#btn:active {
+  background: #1f74ac;
+}
+.particle {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.8);
+  pointer-events: none;
+  transform: translate(0, 0);
+  animation: animate 1s ease-out forwards;
+  opacity: 1;
+}
+@keyframes animate {
+  to {
+    transform: translate(var(--tx), var(--ty));
+    opacity: 0;
+  }
+}
