@@ -1,0 +1,153 @@
+@carousel-width: 700px;
+@carousel-height: 480px;
+@photo-border: 14px;
+@photo-shadow: 0 4px 24px rgba(0, 0, 0, 0.55), 0 1px 6px rgba(0,0,0,0.3);
+@bg-color: #1a1a1e;
+@border-color: #f0ece4;
+
+.mystery-carousel {
+  position: relative;
+  width: @carousel-width;
+  height: @carousel-height;
+  margin: 60px auto;
+  overflow: hidden;
+  background: @bg-color;
+  border-radius: 6px;
+  cursor: default;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.carousel-stage {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.carousel-vignette {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 50%,
+    rgba(0, 0, 0, 0.45) 100%
+  );
+}
+
+.photo-card {
+  position: absolute;
+  z-index: 10;
+  left: 50%;
+  top: 50%;
+  transform-origin: center center;
+  will-change: transform;
+  cursor: grab;
+  transition: box-shadow 0.2s ease;
+
+  &:active {
+    cursor: grabbing;
+  }
+
+  .photo-frame {
+    padding: @photo-border;
+    padding-bottom: @photo-border * 2.6;
+    background: @border-color;
+    box-shadow: @photo-shadow;
+    border-radius: 2px;
+    position: relative;
+
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 2px;
+      pointer-events: none;
+      background:
+        linear-gradient(
+          135deg,
+          rgba(255,255,255,0.08) 0%,
+          transparent 40%,
+          transparent 60%,
+          rgba(0,0,0,0.03) 100%
+        );
+    }
+  }
+
+  img {
+    display: block;
+    max-width: 380px;
+    max-height: 260px;
+    width: auto;
+    height: auto;
+    object-fit: cover;
+    border-radius: 1px;
+    filter: saturate(0.85) contrast(1.05);
+  }
+}
+
+.drag-hint {
+  position: absolute;
+  z-index: 5;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+
+  &.active {
+    opacity: 1;
+  }
+
+  &.hint-left,
+  &.hint-right {
+    top: 0;
+    bottom: 0;
+    width: 60px;
+  }
+
+  &.hint-top,
+  &.hint-bottom {
+    left: 0;
+    right: 0;
+    height: 60px;
+  }
+
+  &.hint-left {
+    left: 0;
+    background: linear-gradient(to right, rgba(255,255,255,0.06), transparent);
+  }
+
+  &.hint-right {
+    right: 0;
+    background: linear-gradient(to left, rgba(255,255,255,0.06), transparent);
+  }
+
+  &.hint-top {
+    top: 0;
+    background: linear-gradient(to bottom, rgba(255,255,255,0.06), transparent);
+  }
+
+  &.hint-bottom {
+    bottom: 0;
+    background: linear-gradient(to top, rgba(255,255,255,0.06), transparent);
+  }
+}
+
+@media (max-width: 760px) {
+  .mystery-carousel {
+    width: 95vw;
+    height: 65vw;
+  }
+
+  .photo-card {
+    .photo-frame {
+      padding: 8px;
+      padding-bottom: 20px;
+    }
+
+    img {
+      max-width: 60vw;
+      max-height: 40vw;
+    }
+  }
+}
