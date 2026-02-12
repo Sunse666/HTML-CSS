@@ -1,0 +1,115 @@
+.mystery-carousel {
+  position: relative;
+  width: 700px;
+  height: 480px;
+  margin: 60px auto;
+  overflow: hidden;
+  background: #1a1a1e;
+  border-radius: 6px;
+  cursor: default;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.carousel-stage {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+.carousel-vignette {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  pointer-events: none;
+  background: radial-gradient(ellipse at center, transparent 50%, rgba(0, 0, 0, 0.45) 100%);
+}
+.photo-card {
+  position: absolute;
+  z-index: 10;
+  left: 50%;
+  top: 50%;
+  transform-origin: center center;
+  will-change: transform;
+  cursor: grab;
+  transition: box-shadow 0.2s ease;
+}
+.photo-card:active {
+  cursor: grabbing;
+}
+.photo-card .photo-frame {
+  padding: 14px;
+  padding-bottom: 36.4px;
+  background: #f0ece4;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.55), 0 1px 6px rgba(0, 0, 0, 0.3);
+  border-radius: 2px;
+  position: relative;
+}
+.photo-card .photo-frame::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 2px;
+  pointer-events: none;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, transparent 40%, transparent 60%, rgba(0, 0, 0, 0.03) 100%);
+}
+.photo-card img {
+  display: block;
+  max-width: 380px;
+  max-height: 260px;
+  width: auto;
+  height: auto;
+  object-fit: cover;
+  border-radius: 1px;
+  filter: saturate(0.85) contrast(1.05);
+}
+.drag-hint {
+  position: absolute;
+  z-index: 5;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+.drag-hint.active {
+  opacity: 1;
+}
+.drag-hint.hint-left,
+.drag-hint.hint-right {
+  top: 0;
+  bottom: 0;
+  width: 60px;
+}
+.drag-hint.hint-top,
+.drag-hint.hint-bottom {
+  left: 0;
+  right: 0;
+  height: 60px;
+}
+.drag-hint.hint-left {
+  left: 0;
+  background: linear-gradient(to right, rgba(255, 255, 255, 0.06), transparent);
+}
+.drag-hint.hint-right {
+  right: 0;
+  background: linear-gradient(to left, rgba(255, 255, 255, 0.06), transparent);
+}
+.drag-hint.hint-top {
+  top: 0;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.06), transparent);
+}
+.drag-hint.hint-bottom {
+  bottom: 0;
+  background: linear-gradient(to top, rgba(255, 255, 255, 0.06), transparent);
+}
+@media (max-width: 760px) {
+  .mystery-carousel {
+    width: 95vw;
+    height: 65vw;
+  }
+  .photo-card .photo-frame {
+    padding: 8px;
+    padding-bottom: 20px;
+  }
+  .photo-card img {
+    max-width: 60vw;
+    max-height: 40vw;
+  }
+}
